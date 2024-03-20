@@ -28,7 +28,7 @@ jobs:
           mkdir build && cd build
           cmake -DCMAKE_BUILD_TYPE=Release ..
           cmake --build . --target Benchmarks --config Release
-          ./build/Benchmarks | tee benchmark_result.txt
+          ./Benchmarks | tee ../benchmark_result.txt
 
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
