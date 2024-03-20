@@ -17,21 +17,22 @@ jobs:
     runs-on: macos-latest
     steps:
         - uses: actions/checkout@v4
+        - uses: bencherdev/bencher@main
         - name: Build benchmarks target
         run: |
             git submodule update --init
             mkdir build && cd build
             cmake -DCMAKE_BUILD_TYPE=Release ..
             cmake --build . --target Benchmarks --config Release
-        
-        - name: Track Benchmarks with Bencher
-        uses: bencherdev/bencher@main
-        with:
-            branch: ${{ github.ref }}
-            token: ${{ secrets.BENCHER_API_TOKEN }}
-        run: |
-            bencher run \
-            --branch "${{ github.ref_name }}" \
-            --token "${{ secrets.BENCHER_API_TOKEN }}" \
-            --err \
-            "./Benchmarks | tee ../benchmark_result.txt"
+
+        # - name: Track Benchmarks with Bencher
+        # with:
+        #     branch: ${{ github.ref }}
+        #     token: ${{ secrets.BENCHER_API_TOKEN }}
+        # run: |
+        #     bencher run \
+        #     --branch "${{ github.ref_name }}" \
+        #     --token "${{ secrets.BENCHER_API_TOKEN }}" \
+        #     --err \
+        #     "./Benchmarks | tee ../benchmark_result.txt"
+    
