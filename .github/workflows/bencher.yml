@@ -1,6 +1,5 @@
 on:
     push:
-  
   jobs:
     benchmark_with_bencher:
       name: Continuous Benchmarking with Bencher
