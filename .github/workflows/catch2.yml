@@ -12,7 +12,7 @@ permissions:
 jobs:
   benchmark:
     name: Run C++ benchmark example
-    runs-on: ubuntu-20.04
+    runs-on: macOS
     steps:
       - uses: actions/checkout@v4
       - name: Build and run benchmarks with Catch2
