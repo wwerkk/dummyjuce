@@ -1,9 +1,16 @@
 name: Catch2 C++ Example
+
 on:
   workflow_dispatch: # lets you run a build from the UI
   push:
     branches:
       - master
+
+env:
+    BUILD_TYPE: Release
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    CMAKE_BUILD_PARALLEL_LEVEL: 3 # Use up to 3 cpus to build juceaide, etc
+    HOMEBREW_NO_INSTALL_CLEANUP: 1
 
 permissions:
   contents: write
