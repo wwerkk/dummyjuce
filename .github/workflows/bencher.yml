@@ -16,16 +16,16 @@ jobs:
     name: Continuous Benchmarking with Bencher
     runs-on: macos-latest
     steps:
-        - uses: actions/checkout@v4
-        - uses: bencherdev/bencher@main
         - name: Build benchmarks target
+        uses: actions/checkout@v4
         run: |
             git submodule update --init
             mkdir build && cd build
             cmake -DCMAKE_BUILD_TYPE=Release ..
             cmake --build . --target Benchmarks --config Release
-
+        
         # - name: Track Benchmarks with Bencher
+        # uses: bencherdev/bencher@main
         # with:
         #     branch: ${{ github.ref }}
         #     token: ${{ secrets.BENCHER_API_TOKEN }}
