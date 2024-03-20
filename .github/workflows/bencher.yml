@@ -1,6 +1,9 @@
+name: Bencher
+
 on:
     push:
-  jobs:
+
+jobs:
     benchmark_with_bencher:
       name: Continuous Benchmarking with Bencher
       runs-on: ubuntu-latest
