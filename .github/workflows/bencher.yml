@@ -1,24 +1,37 @@
 name: Bencher
 
 on:
-    workflow_dispatch: # lets you run a build from the UI
-    push:
+  workflow_dispatch: # Allows running a build from the UI
+  push:
+
+env:
+  BENCHER_PROJECT: dummy
+  BENCHER_TESTBED: macos-latest
+  BENCHER_ADAPTER: cpp_catch2
+  CMAKE_BUILD_PARALLEL_LEVEL: 3 # Uses up to 3 CPUs to build juceaide, etc
+  HOMEBREW_NO_INSTALL_CLEANUP: 1
 
 jobs:
-    benchmark_with_bencher:
-      name: Continuous Benchmarking with Bencher
-      runs-on: ubuntu-latest
-      env:
-        BENCHER_PROJECT: dummy
-        BENCHER_TESTBED: ubuntu-latest
-        BENCHER_ADAPTER: json
-      steps:
-        - uses: actions/checkout@v4
-        - uses: bencherdev/bencher@main
-        - name: Track Benchmarks with Bencher
-          run: |
-            bencher run \
-            --branch "$GITHUB_REF_NAME" \
-            --token "${{ secrets.BENCHER_API_TOKEN }}" \
-            --err \
-            "bencher mock"
+  benchmark:
+    name: Continuous Benchmarking with Bencher
+    runs-on: macos-latest
+    steps:
+      - name: Build benchmarks target
+        uses: actions/checkout@v4
+        run: |
+          git submodule update --init
+          mkdir build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Release ..
+          cmake --build . --target Benchmarks --config Release
+        
+      - name: Track Benchmarks with Bencher
+        uses: bencherdev/bencher@main
+        with:
+          branch: ${{ github.ref }}
+          token: ${{ secrets.BENCHER_API_TOKEN }}
+        run: |
+          bencher run \
+          --branch "${{ github.ref_name }}" \
+          --token "${{ secrets.BENCHER_API_TOKEN }}" \
+          --err \
+          "./Benchmarks | tee ../benchmark_result.txt"
