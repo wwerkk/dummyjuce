@@ -2,7 +2,7 @@ window.BENCHMARK_DATA = {
   "lastUpdate": 1711033026608,
   "repoUrl": "https://github.com/wwerkk/dummyjuce",
   "entries": {
-    "My Project Go Benchmark": [
+    "Dummy JUCE Project Benchmark": [
       {
         "commit": {
           "author": {
