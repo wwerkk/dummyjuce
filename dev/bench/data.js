@@ -45,7 +45,7 @@ window.BENCHMARK_DATA = {
         ]
       }
     ],
-    "My Project Go Benchmark": [
+    "Dummy Juce Project Benchmark": [
       {
         "commit": {
           "author": {
