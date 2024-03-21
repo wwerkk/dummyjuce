@@ -1,4 +1,4 @@
-name: Bencher
+name: Catch2 to Bencher
 # TODO: add PR branch handling
 on:
   workflow_dispatch: # lets you run a build from the UI
