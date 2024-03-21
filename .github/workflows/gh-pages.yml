@@ -12,18 +12,32 @@ permissions:
   # contents permission to update benchmark contents in gh-pages branch
   contents: write
 
+env:
+    BUILD_TYPE: Release
+    CMAKE_BUILD_PARALLEL_LEVEL: 3 # Use up to 3 cpus to build juceaide, etc
+    HOMEBREW_NO_INSTALL_CLEANUP: 1
+
 jobs:
   benchmark:
-    name: Extract and store bench result
-    runs-on: ubuntu-latest
+    name: Run benchmark and store results
+    runs-on: macos-latest
     steps:
+      - uses: actions/checkout@v4
+      - name: Build and run Catch2 bench
+        run: |
+          git submodule update --init
+          mkdir build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Release ..
+          cmake --build . --target Benchmarks --config Release
+          ./Benchmarks | tee ../benchmark_result.txt
+
       - uses: actions/checkout@v4
       # gh-pages branch is updated and pushed automatically with extracted benchmark data
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
         with:
           name: My Project Go Benchmark
-          tool: 'catch2'
+          tool: "catch2"
           output-file-path: benchmark_result.txt
           # Access token to deploy GitHub Pages branch
           github-token: ${{ secrets.GITHUB_TOKEN }}
