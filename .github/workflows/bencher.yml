@@ -27,4 +27,5 @@ jobs:
           --branch "$GITHUB_REF_NAME" \
           --token "${{ secrets.BENCHER_API_TOKEN }}" \
           --err \
-          "./Benchmarks | tee ../benchmark_result.txt"
+          --file build/benchmark_result.txt
+          # "./Benchmarks | tee ../benchmark_result.txt"
