@@ -1,6 +1,7 @@
 name: Benchmark with GH Pages
 # Do not run this workflow on pull request since this workflow has permission to modify contents.
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
