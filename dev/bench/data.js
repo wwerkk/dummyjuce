@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1711038266002,
+  "lastUpdate": 1711038404925,
   "repoUrl": "https://github.com/wwerkk/dummyjuce",
   "entries": {
     "Dummy JUCE Project Benchmark": [
@@ -455,6 +455,47 @@ window.BENCHMARK_DATA = {
             "name": "Editor open and close",
             "value": 614.382,
             "range": "± 19.0253",
+            "unit": "us",
+            "extra": "100 samples\n1 iterations"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "W.K. Werkowicz",
+            "email": "wwerkowicz@gmail.com"
+          },
+          "committer": {
+            "name": "W.K. Werkowicz",
+            "email": "wwerkowicz@gmail.com"
+          },
+          "id": "349d497eae65d98b9a54dc072aa81c2fa0a1ceea",
+          "message": "add benchmark_results.txt to gitignore",
+          "timestamp": "2024-03-21T16:00:45Z",
+          "url": "https://github.com/wwerkk/dummyjuce/commit/349d497eae65d98b9a54dc072aa81c2fa0a1ceea"
+        },
+        "date": 1711038403605,
+        "tool": "catch2",
+        "benches": [
+          {
+            "name": "Processor constructor",
+            "value": 4.59337,
+            "range": "± 5.59772",
+            "unit": "us",
+            "extra": "100 samples\n15 iterations"
+          },
+          {
+            "name": "Processor destructor",
+            "value": 522.667,
+            "range": "± 6.6432",
+            "unit": "ns",
+            "extra": "100 samples\n71 iterations"
+          },
+          {
+            "name": "Editor open and close",
+            "value": 724.024,
+            "range": "± 288.378",
             "unit": "us",
             "extra": "100 samples\n1 iterations"
           }
