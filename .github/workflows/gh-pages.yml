@@ -36,7 +36,7 @@ jobs:
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
         with:
-          name: My Project Go Benchmark
+          name: Dummy JUCE Project Benchmark
           tool: "catch2"
           output-file-path: benchmark_result.txt
           # Access token to deploy GitHub Pages branch
