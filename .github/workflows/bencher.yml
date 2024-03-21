@@ -7,22 +7,23 @@ on:
 jobs:
   benchmark_with_bencher:
     name: Continuous Benchmarking with Bencher
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     env:
       BENCHER_PROJECT: dummy
-      BENCHER_TESTBED: ubuntu-latest
+      BENCHER_TESTBED: macos-latest
       BENCHER_ADAPTER: cpp_catch2
     steps:
       - uses: actions/checkout@v4
-      # - name: Build
-      #   run: |
-      #     git submodule update --init
-      #     mkdir build && cd build
-      #     cmake -DCMAKE_BUILD_TYPE=Release ..
-      #     cmake --build . --target Benchmarks --config Release
+      - name: Build
+        run: |
+          git submodule update --init
+          mkdir build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Release ..
+          cmake --build . --target Benchmarks --config Release
       - uses: bencherdev/bencher@main
       - name: Track Benchmarks with Bencher
         run: |
+          export BENCHER_CMD="/Users/kacper/dummyjuce/build/Benchmarks | tee ../benchmarks_result.txt”
           bencher run \
           --branch "$GITHUB_REF_NAME" \
           --token "${{ secrets.BENCHER_API_TOKEN }}" \
