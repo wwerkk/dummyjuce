@@ -3,8 +3,8 @@ name: GH Continuous Benchmark
 on:
   workflow_dispatch: # lets you run a build from the UI
   push:
-    branches:
-      - master
+    # branches:
+      # - main
 
 env:
   BUILD_TYPE: Release
