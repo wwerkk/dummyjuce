@@ -2,9 +2,6 @@ name: Catch2 example
 
 on:
   workflow_dispatch: # lets you run a build from the UI
-  # push:
-    # branches:
-      # - main
 
 env:
   BUILD_TYPE: Release
