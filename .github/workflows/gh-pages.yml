@@ -20,7 +20,7 @@ env:
 jobs:
   benchmark:
     name: Run benchmark and store results
-    runs-on: macos-latest
+    runs-on: macos-latest-large
     steps:
       - uses: actions/checkout@v4
       - name: Build and run Catch2 bench
