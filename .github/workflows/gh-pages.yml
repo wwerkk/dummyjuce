@@ -18,18 +18,9 @@ env:
 
 jobs:
   benchmark:
-    name: Run benchmark and store results
+    name: Benchmark
     runs-on: macos-latest
     steps:
-      # - uses: actions/checkout@v4
-      # - name: Build and run Catch2 bench
-      #   run: |
-      #     git submodule update --init
-      #     mkdir build && cd build
-      #     cmake -DCMAKE_BUILD_TYPE=Release ..
-      #     cmake --build . --target Benchmarks --config Release
-      #     ./Benchmarks | tee ../benchmark_result.txt
-
       - name: Parse output file and push to Pages
         uses: INA-grm/github-action-benchmark@v0.2.19-wip 
         with:
