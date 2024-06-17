@@ -22,13 +22,39 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Make fake data
-        run: touch benchmark_result.txt
+        run: |
+        cat << 'EOF' > output.txt
+        Randomness seeded to: 4003265267
+
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         is a Catch2 v3.5.3 host application.
+        Run with -? for options
+
+        -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        patch benchmark
+        -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        /Users/gh-runner/actions-runner/_work/GRM-Tools-4/GRM-Tools-4/src/common/common/patch_benchmark.cpp:84
+        .......................................................................................................................................................................................................
+
+        benchmark name                                                                                                                                               samples       iterations    est run time
+                                                                                                                                                                     mean          low mean      high mean
+                                                                                                                                                                     std dev       low std dev   high std dev
+        -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        Patches, mammal: 2 ch @ 48000 Hz, block size 512                                                                                                                     15000             1     24.3756 s 
+                                                                                                                                                                        1.03991 ms     1.0303 ms    1.05351 ms 
+                                                                                                                                                                        703.731 us     558.06 us    1.15476 ms 
+                                                                                                                                                                                                       
+
+        =======================================================================================================================================================================================================
+        test cases: 1 | 1 passed
+        assertions: - none -
+        EOF
       - name: Parse output file and push to Pages
         uses: INA-grm/github-action-benchmark@v0.2.19-wip 
         with:
           name: Dummy JUCE Project Benchmark
           tool: "catch2"
-          output-file-path: benchmark_result.txt
+          output-file-path: output.txt
           # Access token to deploy GitHub Pages branch
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # Push and deploy GitHub pages branch automatically
