@@ -1,10 +1,9 @@
-name: Catch2 to GH Pages
+name: GH Pages PR Debug
 # Do not run this workflow on pull request since this workflow has permission to modify contents.
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  pull_request:
+    branches: [develop]
 
 permissions:
   # deployments permission to deploy GitHub pages website
@@ -22,17 +21,16 @@ jobs:
     name: Run benchmark and store results
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Build and run Catch2 bench
-        run: |
-          git submodule update --init
-          mkdir build && cd build
-          cmake -DCMAKE_BUILD_TYPE=Release ..
-          cmake --build . --target Benchmarks --config Release
-          ./Benchmarks | tee ../benchmark_result.txt
+      # - uses: actions/checkout@v4
+      # - name: Build and run Catch2 bench
+      #   run: |
+      #     git submodule update --init
+      #     mkdir build && cd build
+      #     cmake -DCMAKE_BUILD_TYPE=Release ..
+      #     cmake --build . --target Benchmarks --config Release
+      #     ./Benchmarks | tee ../benchmark_result.txt
 
-      # gh-pages branch is updated and pushed automatically with extracted benchmark data
-      - name: Store benchmark result
+      - name: Parse output file and push to Pages
         uses: benchmark-action/github-action-benchmark@v1
         with:
           name: Dummy JUCE Project Benchmark
