@@ -18,15 +18,17 @@ env:
 
 jobs:
   benchmark:
-    name: Benchmark
+    name: Run benchmark and store results
     runs-on: macos-latest
     steps:
+      - name: Make fake data
+        run: touch benchmark_result.txt
       - name: Parse output file and push to Pages
         uses: INA-grm/github-action-benchmark@v0.2.19-wip 
         with:
           name: Dummy JUCE Project Benchmark
           tool: "catch2"
-          output-file-path: ../benchmark_result.txt
+          output-file-path: benchmark_result.txt
           # Access token to deploy GitHub Pages branch
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # Push and deploy GitHub pages branch automatically
