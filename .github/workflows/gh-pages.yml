@@ -31,7 +31,7 @@ jobs:
       #     ./Benchmarks | tee ../benchmark_result.txt
 
       - name: Parse output file and push to Pages
-        uses: benchmark-action/github-action-benchmark@v1
+        uses: INA-grm/github-action-benchmark@v0.2.19-wip
         with:
           name: Dummy JUCE Project Benchmark
           tool: "catch2"
